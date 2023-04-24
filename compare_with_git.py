@@ -4,6 +4,11 @@ import os
 from PIL import Image, ImageChops
 import io
 import imghdr
+import numpy as np
+
+# Define the brightness threshold (in percent)
+# if no diff pixel is brighter than this consider files equal
+BRIGHTNESS_THRESHOLD = 5
 
 def compare_images():
     # Get the path of the repository
@@ -36,8 +41,10 @@ def compare_images():
         current_image = current_image.resize((128, 128))
         # Create a diff image
         diff_image = ImageChops.difference(current_image, old_image)
-        # Check if the diff image is empty
-        if diff_image.getbbox():
+        # Convert to numpy array and check if any pixel is brighter than the threshold
+        diff_array = np.array(diff_image)
+        threshold = int(255 * BRIGHTNESS_THRESHOLD / 100)
+        if (diff_array > threshold).any():
             # Save the diff image
             diff_image.save(f'{rel_path}#diff.png')
         else:
@@ -47,5 +54,4 @@ def compare_images():
                 with open(image_path, 'wb') as f:
                     f.write(old_image_data)
 
-# Example usage
 compare_images()
