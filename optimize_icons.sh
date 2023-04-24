@@ -138,3 +138,5 @@ reconvert_rescale "$ICONS_DIR" 1024 1024 1080 1080
 cd "$TENALDO_SQUARE_DIR"
 strip_alpha "$TENALDO_SQUARE_DIR" # We shouldn't need to do that but let's check anyway
 reconvert_rescale "$TENALDO_SQUARE_DIR" 1024 1024 1134 1134
+
+echo
