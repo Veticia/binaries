@@ -8,7 +8,7 @@ import numpy as np
 
 # Define the brightness threshold (in percent)
 # if no diff pixel is brighter than this consider files equal
-BRIGHTNESS_THRESHOLD = 5
+BRIGHTNESS_THRESHOLD = 10
 
 def compare_images():
     # Get the path of the repository
@@ -41,6 +41,8 @@ def compare_images():
         current_image = current_image.resize((128, 128))
         # Create a diff image
         diff_image = ImageChops.difference(current_image, old_image)
+        # Convert to luminance
+        diff_image = diff_image.convert('L')
         # Convert to numpy array and check if any pixel is brighter than the threshold
         diff_array = np.array(diff_image)
         threshold = int(255 * BRIGHTNESS_THRESHOLD / 100)
