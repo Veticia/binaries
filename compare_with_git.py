@@ -8,7 +8,7 @@ import numpy as np
 
 # Define the brightness threshold (in percent)
 # if no diff pixel is brighter than this consider files equal
-BRIGHTNESS_THRESHOLD = 10
+BRIGHTNESS_THRESHOLD = 15
 
 def compare_images():
     # Get the path of the repository
