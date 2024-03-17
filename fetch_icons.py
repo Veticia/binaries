@@ -32,16 +32,17 @@ def merge_apps(existing_apps, new_apps):
 
 def fetch_pico_apps(existing_apps):
     logging.info("Fetching Pico apps...")
+
     pico_options = {
-        "url": "https://appstore-us.picovr.com/api/app/v1/section/info",
+        "url": "https://appstore-us.picoxr.com/api/app/v1/section/info",
         "method": "POST",
         "params": {
-            "manifest_version_code": "300800000",
+            "manifest_version_code": "400400000",
             "app_language": "en",
             "size": "20",
             "device_name": "A8110",
             "page": "1",
-            "section_id": "3",
+            "section_id": "51",
         },
     }
 
@@ -199,7 +200,7 @@ def fetch_pico_covers(app_data):
         os.makedirs("banners")
 
     urls = [
-        f"https://appstore-us.picovr.com/api/app/v1/item/info?app_language=en&device_name=A8110&item_id={app['id']}&manifest_version_code=300800000"
+        f"https://appstore-us.picoxr.com/api/app/v1/item/info?app_language=en&device_name=A8110&item_id={app['id']}&manifest_version_code=400400000"
         for app in app_data
     ]
 
@@ -240,7 +241,7 @@ if __name__ == "__main__":
             existing_oculus_apps = json.load(f)
     except FileNotFoundError:
         existing_oculus_apps = []
-
+    
     fetch_oculus_apps_with_covers(existing_oculus_apps)
 
     try:
